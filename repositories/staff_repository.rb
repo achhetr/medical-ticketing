@@ -12,5 +12,6 @@ class StaffRepository < BaseRepository
       row[:age] = row[:age].to_i
       @elements << Staff.new(row)
     end
+    @next_id = @elements.last.id + 1 unless @elements.empty?
   end
 end

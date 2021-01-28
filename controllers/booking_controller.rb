@@ -38,10 +38,28 @@ class BookingController < BaseController
     # @history_repository.create(booking_info)
   end
 
-  # getting id
-  def examine(id)
-    @element_repository.delete!(id)
-    # @history_repository.examine(id)
+  # list booking
+  def list
+    @booking_views.display("Booking")
+    if empty?
+      @booking_views.display("EMPTY!!!!!!!")
+    else
+      doctor_arr = @element_repository.all
+      @booking_views.list_arr(doctor_arr)
+    end
   end
 
+  # getting id
+  def examine
+    # list all bookings
+    list
+    
+    if empty?
+      @booking_views.display("No Booking")
+    else
+      id = @booking_views.user_input(prompt)
+      @element_repository.delete!(id) 
+    end
+    # @history_repository.examine(id)
+  end
 end

@@ -14,6 +14,6 @@ class PatientRepository < BaseRepository
       row[:age] = row[:age].to_i
       @elements << Patient.new(row)
     end
-    @next_id = @elements.last.id + 1
+    @next_id = @elements.last.id + 1 unless @elements.empty?
   end
 end
