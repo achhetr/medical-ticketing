@@ -18,7 +18,7 @@ class Router
   def run_doctor
     choice = @router_views.print_doctor_options
     if choice == 1
-      @book_controller.examine
+      @booking_controller.examine
     else 
       stop!
     end
@@ -30,7 +30,7 @@ class Router
       when 1 then @patient_controller.create
       when 2 then @patient_controller.list
       when 3 then @patient_controller.delete
-      when 4 then @book_controller.book
+      when 4 then @booking_controller.book
       else stop!
     end
   end

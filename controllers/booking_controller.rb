@@ -11,26 +11,44 @@ class BookingController < BaseController
     @booking_views = BookingViews.new
   end
 
-  def create
+  def book
     booking_hash = {}
     # view get list of patient
     patient_arr = @patient_repository.all
-    patient_index = @booking_views.list_arr(patient_arr).to_i - 1
-    # get patient selection
-    booking_hash[:patient] = patient_arr[patient_index].id
+    @booking_views.list_arr(patient_arr)
+    patient_index = @booking_views.user_input("Select patient number").to_i - 1
+
+    if patient_index >= patient_arr.length
+      @booking_views.display("Wrong selection for patient number")
+      return
+    end
 
     # view get list of staff
     staff_arr = @staff_repository.all
-    staff_index = @booking_views.list_arr(staff_arr).to_i - 1
-    # get staff selection
-    booking_hash[:staff] = staff_arr[staff_index].id
+    @booking_views.list_arr(staff_arr)
+    staff_index = @booking_views.user_input("Select staff number").to_i - 1
+
+    if staff_index >= staff_arr.length
+      @booking_views.display("Wrong selection for staff number")
+      return
+    end
 
     # view get list of doctor
     doctor_arr = @doctor_repository.all
-    doctor_index = @booking_views.list_arr(doctor_arr).to_i - 1
+    @booking_views.list_arr(doctor_arr).to_i - 1
+    doctor_index = @booking_views.user_input("Select doctor").to_i - 1
+    if doctor_index >= doctor_arr.length
+      @booking_views.display("Wrong selection for doctor number")
+      return
+    end
+
+    # get patient selection
+    booking_hash[:patient] = patient_arr[patient_index].id
+    # get staff selection
+    booking_hash[:staff] = staff_arr[staff_index].id
     # select doctor
     booking_hash[:doctor] = doctor_arr[doctor_index].id
-    
+
     # book patient
     booking_info = Booking.new(booking_hash)
 

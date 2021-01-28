@@ -22,7 +22,7 @@ class DoctorController < BaseController
   def create
     # get doctor information
     # create doctor instance
-    doctor = doctor.new(doctor_info)
+    doctor = Doctor.new(doctor_info)
     # add to repository and save in csv
     @element_repository.create(doctor)
     @doctor_views.display("SUCCESSFULLY CREATED doctor RECORD")
