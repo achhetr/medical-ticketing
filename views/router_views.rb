@@ -32,7 +32,8 @@ class RouterView
 
   def print_doctor_options
     print_dash
-    puts "1. Examine patient"
+    puts "1. List booked patient"
+    puts "2. Examine patient"
     print "> "
     gets.chomp.to_i
   end

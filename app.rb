@@ -41,7 +41,8 @@ all_repository = {
   booking_repository: booking_repository,
   manager_repository: manager_repository,
   staff_repository: staff_repository,
-  patient_repository: patient_repository
+  patient_repository: patient_repository,
+  doctor_repository: doctor_repository
 }
 
 booking_controller = BookingController.new(all_repository)

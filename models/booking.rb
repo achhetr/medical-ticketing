@@ -13,6 +13,10 @@ class Booking
     @booking = attributes[:booking] || false
   end
 
+  def to_array
+    [@id, @staff, @patient, @doctor, @booking]
+  end
+
   def booking?
     @booking
   end

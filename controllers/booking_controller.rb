@@ -2,11 +2,14 @@ require_relative './base_controller'
 require_relative '../views/booking_views'
 require_relative '../models/booking'
 
+require 'pry-byebug'
+
 class BookingController < BaseController
   def initialize(attributes = {})
     super(attributes[:booking_repository])
     @patient_repository = attributes[:patient_repository]
     @staff_repository = attributes[:staff_repository]
+    @doctor_repository = attributes[:doctor_repository]
     # @history_repository = attributes[:history_repository]
     @booking_views = BookingViews.new
   end
@@ -35,7 +38,7 @@ class BookingController < BaseController
 
     # view get list of doctor
     doctor_arr = @doctor_repository.all
-    @booking_views.list_arr(doctor_arr).to_i - 1
+    @booking_views.list_arr(doctor_arr)
     doctor_index = @booking_views.user_input("Select doctor").to_i - 1
     if doctor_index >= doctor_arr.length
       @booking_views.display("Wrong selection for doctor number")
