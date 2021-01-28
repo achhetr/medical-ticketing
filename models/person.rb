@@ -28,5 +28,9 @@ class Person
   def manager?
     @role == 'manager'
   end
+
+  def to_s
+    "Name: #{@name} | age: #{@age} | mobile: #{@mobile}"
+  end
     
 end
