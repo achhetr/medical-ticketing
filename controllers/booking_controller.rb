@@ -73,7 +73,7 @@ class BookingController < BaseController
         hash[:staff] = @staff_repository.find_name(booking.staff) 
         hash
       end
-      @booking_views.list_arr(booking_hashed_arr)
+      @booking_views.list_hash_arr(booking_hashed_arr)
     end
   end
 
@@ -90,5 +90,3 @@ class BookingController < BaseController
   end
 end
 
-  # id,staff,patient,doctor,booking
-  # 1,1,1,1,false

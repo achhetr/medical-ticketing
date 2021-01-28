@@ -62,7 +62,7 @@ class PatientController < BaseController
     unless empty?
       # get input from user about the list selection
       index = @patient_views.user_input('Please enter index number for patient').to_i - 1
-
+      id = @element_repository.all[index].id
       # delete value
       @element_repository.delete!(id)
     end
