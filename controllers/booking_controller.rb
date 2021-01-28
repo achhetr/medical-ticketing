@@ -83,8 +83,8 @@ class BookingController < BaseController
     list
     unless empty?
       id = @booking_views.user_input("Enter patient number to examine").to_i - 1
-      booking_id = @element_repository.all[id].id
-      @element_repository.delete!(booking_id) 
+      id = @element_repository.all[index].id
+      @element_repository.delete!(id) 
     end
     # @history_repository.examine(id)
   end

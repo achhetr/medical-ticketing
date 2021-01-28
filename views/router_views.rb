@@ -12,11 +12,19 @@ class RouterView
     print_dash
   end
 
-  def print_start
+  def exit
+    puts "Enter anything to quit"
+  end
+
+  def clear
     print `clear`
+  end
+
+  def print_start
     puts "Enter 1. if you are a doctor"
     puts "Enter 2. if you are a staff"
     puts "Enter 3. if you are a manager"
+    exit
     gets.chomp.to_i
   end
 
@@ -26,6 +34,7 @@ class RouterView
     puts "2. List all patients"
     puts "3. Delete patient"
     puts "4. Book patient"
+    exit
     print "> "
     gets.chomp.to_i
   end
@@ -34,6 +43,7 @@ class RouterView
     print_dash
     puts "1. List booked patient"
     puts "2. Examine patient"
+    exit
     print "> "
     gets.chomp.to_i
   end
@@ -47,6 +57,7 @@ class RouterView
     puts "5. Remove staff"
     puts "6. List all staff"
     puts "7. List manager"
+    exit
     print "> "
     gets.chomp.to_i
   end

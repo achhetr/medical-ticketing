@@ -50,15 +50,17 @@ class Router
   end
 
   def run
-    choice = @router_views.print_start
+    @router_views.clear
     until @stop
       # first input for staff, doctor, manager
-      case choice
+      @choice = @router_views.print_start
+      case @choice
         when 1 then run_doctor
         when 2 then run_staff
         when 3 then run_manager
         else stop!
       end
+      
     end
   end
 end
