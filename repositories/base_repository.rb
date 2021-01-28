@@ -22,10 +22,16 @@ class BaseRepository
   def all
     @elements
   end
-
+  
   # find element from id
   def find(id)
     @elements.find { |element| element.id == id}
+  end
+
+  # find name from id
+  def find_name(id)
+    element = @elements.find { |element| element.id == id}
+    element.name
   end
 
   # delete element from the array
@@ -47,8 +53,10 @@ class BaseRepository
   # save data into csv
   def save_csv
     CSV.open(@file_path, "wb") do |csv|
-      csv << @elements.first.class.csv_headers
-      @elements.each { |element| csv << element.to_array }
+      unless @elements.empty?
+        csv << @elements.first.class.csv_headers
+        @elements.each { |element| csv << element.to_array }
+      end
     end
   end
 end

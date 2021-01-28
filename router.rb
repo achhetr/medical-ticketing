@@ -18,8 +18,8 @@ class Router
   def run_doctor
     choice = @router_views.print_doctor_options
     case choice
-    when 2 then @booking_controller.list
-    when 1 then @booking_controller.examine
+    when 1 then @booking_controller.list
+    when 2 then @booking_controller.examine
     else stop!
     end
   end

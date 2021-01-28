@@ -65,8 +65,15 @@ class BookingController < BaseController
     if empty?
       @booking_views.display("EMPTY!!!!!!!")
     else
-      doctor_arr = @element_repository.all
-      @booking_views.list_arr(doctor_arr)
+      booking_arr = @element_repository.all
+      booking_hashed_arr = booking_arr.map do |booking|
+        hash = {}
+        hash[:patient] = @patient_repository.find_name(booking.patient)
+        hash[:doctor] = @doctor_repository.find_name(booking.doctor)
+        hash[:staff] = @staff_repository.find_name(booking.staff) 
+        hash
+      end
+      @booking_views.list_arr(booking_hashed_arr)
     end
   end
 
@@ -74,13 +81,14 @@ class BookingController < BaseController
   def examine
     # list all bookings
     list
-    
-    if empty?
-      @booking_views.display("No Booking")
-    else
-      id = @booking_views.user_input(prompt)
-      @element_repository.delete!(id) 
+    unless empty?
+      id = @booking_views.user_input("Enter patient number to examine").to_i - 1
+      booking_id = @element_repository.all[id].id
+      @element_repository.delete!(booking_id) 
     end
     # @history_repository.examine(id)
   end
 end
+
+  # id,staff,patient,doctor,booking
+  # 1,1,1,1,false
