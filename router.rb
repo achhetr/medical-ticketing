@@ -17,6 +17,7 @@ class Router
 
   def run_doctor
     choice = @router_views.print_doctor_options
+    @router_views.print_dash
     case choice
     when 1 then @booking_controller.list
     when 2 then @booking_controller.examine
@@ -26,17 +27,33 @@ class Router
 
   def run_staff
     choice = @router_views.print_staff_options
+    @router_views.print_dash
     case choice
       when 1 then @patient_controller.create
       when 2 then @patient_controller.list
       when 3 then @patient_controller.delete
-      when 4 then @booking_controller.book
+      when 4 then book
       else stop!
     end
   end
 
+  def book
+    book_successful = @booking_controller.book
+    all_staff_doctor_manager unless book_successful
+  end
+
+  def all_staff_doctor_manager
+    @router_views.print_dash
+    @manager_controller.list
+    @router_views.print_dash
+    @staff_controller.list
+    @router_views.print_dash
+    @doctor_controller.list
+  end
+
   def run_manager
     choice = @router_views.print_manager_options
+    @router_views.print_dash
     case choice
       when 1 then @doctor_controller.create
       when 2 then @doctor_controller.delete
@@ -45,6 +62,7 @@ class Router
       when 5 then @staff_controller.delete
       when 6 then @staff_controller.list
       when 7 then @manager_controller.list
+      when 8 then all_staff_doctor_manager
     else stop!
     end
   end

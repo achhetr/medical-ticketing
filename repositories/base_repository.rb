@@ -18,6 +18,10 @@ class BaseRepository
     save_csv
   end
 
+  def empty?
+    @elements.empty?
+  end
+
   # get all elements
   def all
     @elements

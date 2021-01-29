@@ -15,6 +15,10 @@ class BookingController < BaseController
   end
 
   def book
+    if @patient_repository.empty? || @staff_repository.empty? || @doctor_repository.empty?
+      @booking_views.display("BOOKING FAILED, LACK OF INFORMATION")
+      return false
+    end
     booking_hash = {}
     # view get list of patient
     patient_arr = @patient_repository.all
@@ -23,7 +27,7 @@ class BookingController < BaseController
 
     if patient_index >= patient_arr.length
       @booking_views.display("Wrong selection for patient number")
-      return
+      return false
     end
 
     # view get list of staff
@@ -33,7 +37,7 @@ class BookingController < BaseController
 
     if staff_index >= staff_arr.length
       @booking_views.display("Wrong selection for staff number")
-      return
+      return false
     end
 
     # view get list of doctor
@@ -42,7 +46,7 @@ class BookingController < BaseController
     doctor_index = @booking_views.user_input("Select doctor").to_i - 1
     if doctor_index >= doctor_arr.length
       @booking_views.display("Wrong selection for doctor number")
-      return
+      return false
     end
 
     # get patient selection
@@ -57,6 +61,7 @@ class BookingController < BaseController
 
     @element_repository.create(booking_info)
     # @history_repository.create(booking_info)
+    return true
   end
 
   # list booking

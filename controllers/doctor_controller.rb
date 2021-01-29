@@ -36,7 +36,6 @@ class DoctorController < BaseController
       # get input from user about the list selection
       index = @doctor_views.user_input('Please enter index number for doctor').to_i - 1
       id = @element_repository.all[index].id
-
       # delete value
       @element_repository.delete!(id)
     end
